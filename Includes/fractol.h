@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/26 10:48:32 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/05/12 19:03:49 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/05/13 20:02:40 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include "mlx.h"
 # include "libft.h"
 
+# define OPT_REF "p"
+# define OPT param->opt
+# define P (OPT & (1 << 0))
 # define MLX param->mlx
 # define WIN param->win
 # define POSX param->pos_x
@@ -46,6 +49,7 @@
 # define Z_R param->z_r
 # define Z_I param->z_i
 # define FRCT param->frct
+# define NAME param->name
 
 typedef struct	s_param
 {
@@ -74,6 +78,9 @@ typedef struct	s_param
 	float	z_r;
 	float	z_i;
 	void	(*frct)(int, int, struct s_param *);
+	char	*name;
+	char	opt;
+
 }				t_param;
 
 typedef	struct	s_pix
@@ -83,14 +90,23 @@ typedef	struct	s_pix
 	unsigned int	color;
 }				t_pix;
 
-t_param			*init_param(int size_x, int size_y, char *title);
-void			white_screen(t_param *param);
+t_param			*init_param(int size_x, int size_y, char opt, char *name);
 void			init_pos(t_param *param);
+
 void			img_put_pixel(t_param *param, int x, int y, unsigned int color);
-int				create_img(t_param *param);
+
 void			mandelbrot(int posx, int posy, t_param *param);
 void			julia(int posx, int posy, t_param *param);
 
+int				get_options(int ac, char **av, char *opt);
+
 void			error_usage(void);
+void			error_opt(char opt);
+
+void			display_param(t_param *param);
+void			display_toolbar(char *title, t_param *param);
+
+int				ft_key(int keycode, t_param *param);
+int				ft_mouse(int button, int x, int y, t_param *param);
 
 #endif
