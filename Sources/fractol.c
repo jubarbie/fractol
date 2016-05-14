@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/05 20:11:28 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/05/13 20:02:02 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/05/14 16:37:08 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	get_fractale(char *name, t_param *param)
 {
 	if (!ft_strcmp(name, "mandelbrot"))
-		FRCT = &mandelbrot;
+		FRCT = &mandelbrot_cl;
 	else if (!ft_strcmp(name, "julia"))
 		FRCT = &julia;
 	else
@@ -24,12 +24,9 @@ static void	get_fractale(char *name, t_param *param)
 
 static int	create_img(t_param *param)
 {
-	int		posx;
-	int		posy;
-
-	posx = (WIN_X / 2 - (X2 - X1) * ZOOM / 2) + POSX;
-	posy = (WIN_Y / 2 - (Y2 - Y1) * ZOOM / 2) + POSY - 31;
-	FRCT(posx, posy, param);
+	P_X = (WIN_X / 2 - (X2 - X1) * ZOOM / 2) + POSX;
+	P_Y = (WIN_Y / 2 - (Y2 - Y1) * ZOOM / 2) + POSY - 31;
+	FRCT(P_X, P_Y, param);
 	mlx_put_image_to_window(MLX, WIN, IMG, 11, 51);
 	display_param(param);
 	return (0);
@@ -61,6 +58,7 @@ int			main(int ac, char **av)
 	if (ac == 2)
 	{
 		param = init_param(900, 600, opt, av[i]);
+		printf("size: %lu\n", sizeof(*param));
 		get_fractale(av[i], param);
 		display_toolbar(av[i], param);
 		mlx_expose_hook(WIN, create_img, param);

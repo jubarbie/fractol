@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 17:19:58 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/05/13 19:42:08 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/05/14 16:15:30 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void		init_pos(t_param *param)
 	Y2 = 1.2;
 	ZOOM = 400;
 	ITER = 20;
+	X = 0;
+	Y = 0;
 	if (!ft_strcmp(NAME, "julia"))
 	{
 		ITER = 100;

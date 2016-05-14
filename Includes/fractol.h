@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/26 10:48:32 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/05/13 20:02:40 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/05/14 16:17:45 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@
 # define Z_I param->z_i
 # define FRCT param->frct
 # define NAME param->name
+# define X param->x
+# define Y param->y
+# define P_X param->px
+# define P_Y param->py
 
 typedef struct	s_param
 {
@@ -80,7 +84,10 @@ typedef struct	s_param
 	void	(*frct)(int, int, struct s_param *);
 	char	*name;
 	char	opt;
-
+	int		x;
+	int		y;
+	int 	px;
+	int		py;
 }				t_param;
 
 typedef	struct	s_pix
@@ -96,6 +103,7 @@ void			init_pos(t_param *param);
 void			img_put_pixel(t_param *param, int x, int y, unsigned int color);
 
 void			mandelbrot(int posx, int posy, t_param *param);
+void			mandelbrot_cl(int x, int y, t_param *param);
 void			julia(int posx, int posy, t_param *param);
 
 int				get_options(int ac, char **av, char *opt);
