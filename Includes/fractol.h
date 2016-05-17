@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/26 10:48:32 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/05/13 20:02:40 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/05/17 14:39:09 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void			img_put_pixel(t_param *param, int x, int y, unsigned int color);
 
 void			mandelbrot(int posx, int posy, t_param *param);
 void			julia(int posx, int posy, t_param *param);
+void			buddhabrot(int poxs, int posy, t_param *param);
 
 int				get_options(int ac, char **av, char *opt);
 

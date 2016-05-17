@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/05 20:11:28 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/05/13 20:02:02 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/05/17 14:39:57 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	get_fractale(char *name, t_param *param)
 		FRCT = &mandelbrot;
 	else if (!ft_strcmp(name, "julia"))
 		FRCT = &julia;
+	else if (!ft_strcmp(name, "buddhabrot"))
+		FRCT = &buddhabrot;
 	else
 		error_usage();
 }
@@ -66,6 +68,7 @@ int			main(int ac, char **av)
 		mlx_expose_hook(WIN, create_img, param);
 		mlx_loop_hook(MLX, create_img, param);
 		mlx_hook(WIN, KeyPress, KeyPressMask, ft_key, param);
+		mlx_hook(WIN, MotionNotify, ButtonMotionMask, ft_mouse, param);
 		mlx_hook(WIN, ButtonPress, ButtonPressMask, ft_mouse, param);
 		mlx_loop(MLX);
 		free(param);

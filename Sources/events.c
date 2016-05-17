@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 19:47:10 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/05/13 19:58:23 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/05/17 14:37:59 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int			ft_mouse(int button, int x, int y, t_param *param)
 		COLOR = 255 / ITER << 8;
 	if (button == 1 && x > WIN_X - 30 && x < WIN_X && y > 7 && y < 47)
 		COLOR = 255 / ITER << 16;
+	printf("btn: %d\n", button);
 	return (0);
 }
 
