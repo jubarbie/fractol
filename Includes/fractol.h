@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/26 10:48:32 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/05/17 14:39:09 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/05/18 18:16:20 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,21 @@
 # define Y1 param->y1
 # define Y2 param->y2
 # define ITER param->iter
-# define COLOR param->color
 # define C_R param->c_r
 # define C_I param->c_i
 # define Z_R param->z_r
 # define Z_I param->z_i
 # define FRCT param->frct
 # define NAME param->name
+# define V param->v
+# define COLOR param->color
+# define BLU 255 / ITER << 0
+# define GRE 255 / ITER << 8
+# define RED 255 / ITER << 16
+# define BLG 255 << (ITER % 8)
+# define PUR 255 / ITER << 0 | 255 / ITER << 16
+# define RAI 255 / (ITER % 27 + 1) << 0 | 255 / (ITER % 3 + 1) << 16
+# define PAL (param->palette)
 
 typedef struct	s_param
 {
@@ -73,6 +81,7 @@ typedef struct	s_param
 	float	y2;
 	int		iter;
 	int		color;
+	int		*palette;
 	float	c_r;
 	float	c_i;
 	float	z_r;
@@ -80,7 +89,7 @@ typedef struct	s_param
 	void	(*frct)(int, int, struct s_param *);
 	char	*name;
 	char	opt;
-
+	int		v;
 }				t_param;
 
 typedef	struct	s_pix
@@ -98,6 +107,7 @@ void			img_put_pixel(t_param *param, int x, int y, unsigned int color);
 void			mandelbrot(int posx, int posy, t_param *param);
 void			julia(int posx, int posy, t_param *param);
 void			buddhabrot(int poxs, int posy, t_param *param);
+void			newton(int poxs, int posy, t_param *param);
 
 int				get_options(int ac, char **av, char *opt);
 

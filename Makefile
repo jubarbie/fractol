@@ -6,7 +6,7 @@
 #    By: jubarbie <jubarbie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/30 16:51:35 by jubarbie          #+#    #+#              #
-#    Updated: 2016/05/13 20:07:44 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/05/18 17:37:21 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ clean:
 	rm -rf $(OBJ)
 
 fclean: clean
-	make fclean -C Libs/libtf
+	make fclean -C Libs/libft
 	rm -rf $(NAME)
 
 re: fclean all
