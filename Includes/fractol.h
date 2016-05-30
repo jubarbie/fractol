@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/26 10:48:32 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/05/18 18:16:20 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/05/30 19:13:55 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,22 +74,22 @@ typedef struct	s_param
 	int		sizeline;
 	int		endian;
 	char	*img_addr;
-	float	zoom;
-	float	x1;
-	float	x2;
-	float	y1;
-	float	y2;
+	double	zoom;
+	double	x1;
+	double	x2;
+	double	y1;
+	double	y2;
 	int		iter;
 	int		color;
 	int		*palette;
-	float	c_r;
-	float	c_i;
-	float	z_r;
-	float	z_i;
+	double	c_r;
+	double	c_i;
+	double	z_r;
+	double	z_i;
 	void	(*frct)(int, int, struct s_param *);
 	char	*name;
 	char	opt;
-	int		v;
+	double	v;
 }				t_param;
 
 typedef	struct	s_pix

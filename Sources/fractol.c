@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/05 20:11:28 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/05/18 18:04:36 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/05/30 18:22:37 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static int	create_img(t_param *param)
 	int		posx;
 	int		posy;
 
-	posx = (WIN_X / 2 - (X2 - X1) * ZOOM / 2) + POSX - 5;
-	posy = (WIN_Y / 2 - (Y2 - Y1) * ZOOM / 2) + POSY - 25;
+	posx = (WIN_X / 2 - (X2 - X1) * ZOOM / 2) + POSX;
+	posy = (WIN_Y / 2 - (Y2 - Y1) * ZOOM / 2) + POSY;
 	FRCT(posx, posy, param);
 	mlx_put_image_to_window(MLX, WIN, IMG, 11, 51);
 	display_param(param);

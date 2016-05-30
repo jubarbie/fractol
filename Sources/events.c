@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 19:47:10 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/05/18 18:13:55 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/05/30 19:13:39 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,16 @@ static void	zoom(int keycode, t_param *param)
 	if (keycode == 78)
 	{
 		ZOOM /= (ZOOM > 0) ? 1.5 : 1;
+		POSX /= 1.5;
+		POSY /= 1.5;
 		ITER -= 3;
 	}
 	if (keycode == 69)
 	{
 		ZOOM *= 1.5;
 		ITER += 3;
+		POSX *= 1.5;
+		POSY *= 1.5;
 	}
 }
 
@@ -86,9 +90,9 @@ int			ft_key(int keycode, t_param *param)
 	if (keycode == 35)
 		OPT = ~P;
 	if (keycode == 24)
-		V += (V < 5) ? 1 : 0;
+		V += (V < 5) ? 0.1 : 0;
 	if (keycode == 27)
-		V -= (V > 1) ? 1 : 0;
+		V -= (V > 1) ? 0.1 : 0;
 	if (keycode == 48)
 		FRCT = &julia;
 	return (0);
