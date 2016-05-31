@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 12:38:18 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/05/13 19:25:34 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/05/31 14:10:03 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,17 @@ void		draw_circle(int x, int y, char c, t_param *param)
 
 void		display_param(t_param *param)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	char	s[6];
 
 	if (P)
 	{
 		y = 54;
-		while (++y < 146)
+		while (++y < 186)
 		{
 			x = 14;
-			while (++x < 151)
+			while (++x < 171)
 				mlx_pixel_put(MLX, WIN, x, y, 0x0000000);
 		}
 		mlx_string_put(MLX, WIN, 20, 60, 0x00FFFFFF, "x1: ");
@@ -75,6 +76,12 @@ void		display_param(t_param *param)
 		mlx_string_put(MLX, WIN, 100, 100, 0x00FFFFFF, ft_itoa(ITER));
 		mlx_string_put(MLX, WIN, 20, 120, 0x00FFFFFF, "zoom: ");
 		mlx_string_put(MLX, WIN, 100, 120, 0x00FFFFFF, ft_itoa(ZOOM / 100));
+		mlx_string_put(MLX, WIN, 20, 140, 0x00FFFFFF, "cr: ");
+		snprintf(s, 6, "%f", C_R);
+		mlx_string_put(MLX, WIN, 100, 140, 0x00FFFFFF, s);
+		mlx_string_put(MLX, WIN, 20, 160, 0x00FFFFFF, "ci: ");
+		snprintf(s, 6, "%f", C_I);
+		mlx_string_put(MLX, WIN, 100, 160, 0x00FFFFFF, s);
 	}
 }
 

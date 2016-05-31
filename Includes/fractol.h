@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/26 10:48:32 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/05/30 19:13:55 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/05/31 17:18:12 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@
 # define RED 255 / ITER << 16
 # define BLG 255 << (ITER % 8)
 # define PUR 255 / ITER << 0 | 255 / ITER << 16
-# define RAI 255 / (ITER % 27 + 1) << 0 | 255 / (ITER % 3 + 1) << 16
+# define RAI 255 / (ITER) << 0 ^ 255 / (ITER / 2) << 8 ^ 255 / (ITER / 3) << 16
 # define PAL (param->palette)
 
 typedef struct	s_param
@@ -100,7 +100,7 @@ typedef	struct	s_pix
 }				t_pix;
 
 t_param			*init_param(int size_x, int size_y, char opt, char *name);
-void			init_pos(t_param *param);
+void			init_pos(char *name, t_param *param);
 
 void			img_put_pixel(t_param *param, int x, int y, unsigned int color);
 
@@ -108,6 +108,7 @@ void			mandelbrot(int posx, int posy, t_param *param);
 void			julia(int posx, int posy, t_param *param);
 void			buddhabrot(int poxs, int posy, t_param *param);
 void			newton(int poxs, int posy, t_param *param);
+void			sierpinski(int posx, int posy, t_param *param);
 
 int				get_options(int ac, char **av, char *opt);
 

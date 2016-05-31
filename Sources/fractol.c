@@ -6,13 +6,13 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/05 20:11:28 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/05/30 18:22:37 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/05/31 15:07:56 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	get_fractale(char *name, t_param *param)
+/*static void	get_fractale(char *name, t_param *param)
 {
 	if (!ft_strcmp(name, "mandelbrot"))
 		FRCT = &mandelbrot;
@@ -24,15 +24,15 @@ static void	get_fractale(char *name, t_param *param)
 		FRCT = &newton;
 	else
 		error_usage();
-}
+}*/
 
 static int	create_img(t_param *param)
 {
 	int		posx;
 	int		posy;
 
-	posx = (WIN_X / 2 - (X2 - X1) * ZOOM / 2) + POSX;
-	posy = (WIN_Y / 2 - (Y2 - Y1) * ZOOM / 2) + POSY;
+	posx = (WIN_X / 2 - (X2 - X1) * ZOOM / 2) + POSX - 5;
+	posy = (WIN_Y / 2 - (Y2 - Y1) * ZOOM / 2) + POSY - 25;
 	FRCT(posx, posy, param);
 	mlx_put_image_to_window(MLX, WIN, IMG, 11, 51);
 	display_param(param);
@@ -64,13 +64,11 @@ int			main(int ac, char **av)
 	i += ac - 1;
 	if (ac == 2)
 	{
-		param = init_param(900, 600, opt, av[i]);
-		get_fractale(av[i], param);
-		display_toolbar(av[i], param);
+		param = init_param(900, 800, opt, av[i]);
 		mlx_expose_hook(WIN, create_img, param);
 		mlx_loop_hook(MLX, create_img, param);
 		mlx_hook(WIN, KeyPress, KeyPressMask, ft_key, param);
-		mlx_hook(WIN, MotionNotify, ButtonMotionMask, ft_mouse, param);
+		mlx_hook(WIN, ButtonPress, Button1MotionMask, ft_mouse, param);
 		mlx_hook(WIN, ButtonPress, ButtonPressMask, ft_mouse, param);
 		mlx_loop(MLX);
 		free(param);
