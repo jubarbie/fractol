@@ -6,19 +6,26 @@
 #    By: jubarbie <jubarbie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/30 16:51:35 by jubarbie          #+#    #+#              #
-#    Updated: 2016/05/30 17:59:48 by jubarbie         ###   ########.fr        #
+#    Updated: 2016/06/05 22:06:48 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=gcc
 CFLAGS= -ILibs/libft -ILibs/libmlx -IIncludes -Wall -Wextra -Werror
-SRC=	Sources/fractol.c	\
-		Sources/init.c		\
-		Sources/error.c		\
-		Sources/display.c	\
-		Sources/options.c	\
-		Sources/events.c	\
-		Sources/fractales.c
+SRC=	Sources/fractol.c		\
+		Sources/init.c			\
+		Sources/error.c			\
+		Sources/display.c		\
+		Sources/options.c		\
+		Sources/key_event.c		\
+		Sources/mouse_event.c	\
+		Sources/julia.c			\
+		Sources/mandelbrot.c	\
+		Sources/brain.c			\
+		Sources/burningship.c	\
+		Sources/buddhabrot.c	\
+		Sources/newton.c		\
+		Sources/sierpinski.c
 OBJ=$(SRC:.c=.o)
 NAME=fractol
 

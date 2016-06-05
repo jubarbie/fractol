@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 17:19:58 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/05/31 17:18:08 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/06/05 22:53:39 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,18 @@ static void	get_fractale(char *name, t_param *param)
 		FRCT = &newton;
 	else if (!ft_strcmp(name, "sierpinski"))
 		FRCT = &sierpinski;
+	else if (!ft_strcmp(name, "burningship"))
+		FRCT = &burningship;
+	else if (!ft_strcmp(name, "brain"))
+		FRCT = &brain;
 	else
 		error_usage();
 	NAME = name;
-	display_toolbar(name, param);
 }
 
 static void	init_palette(t_param *param)
 {
-	if (!(PAL = malloc(sizeof(int) * 6)))
+	if (!(PAL = malloc(sizeof(unsigned int) * 6)))
 		exit(EXIT_FAILURE);
 	PAL[0] = BLU;
 	PAL[1] = GRE;
@@ -57,16 +60,28 @@ void		init_pos(char *name, t_param *param)
 	Y1 = -1.2;
 	Y2 = 1.2;
 	ZOOM = 300;
-	ITER = 20;
+	ITER_MAX = 20;
 	V = 0;
-	if (!ft_strcmp(NAME, "julia"))
+	if (!ft_strcmp(NAME, "julia") || !ft_strcmp(NAME, "brain"))
 	{
-		ITER = 100;
+		ITER_MAX = 100;
 		X1 = -1;
 		X2 = 1;
 		Y1 = -1.2;
 		Y2 = 1.2;
 	}
+	ITER = ITER_MAX;
+	init_palette(param);
+	display_toolbar(name, param);
+}
+
+void		free_param(t_param *param)
+{
+	mlx_destroy_image(MLX, IMG);
+	MLX = NULL;
+	WIN = NULL;
+	IMG = NULL;
+	free(param);
 }
 
 t_param		*init_param(int size_x, int size_y, char opt, char *name)
@@ -81,9 +96,7 @@ t_param		*init_param(int size_x, int size_y, char opt, char *name)
 	WIN_Y = size_y;
 	BPP = 24;
 	SIZELINE = WIDTH * (BPP / 8);
-	ENDIAN = 0;
 	init_pos(name, param);
-	init_palette(param);
 	OPT = opt;
 	WIDTH = WIN_X - 22;
 	HEIGHT = WIN_Y - 62;

@@ -6,31 +6,19 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/05 20:11:28 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/05/31 15:07:56 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/06/05 22:53:42 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-/*static void	get_fractale(char *name, t_param *param)
-{
-	if (!ft_strcmp(name, "mandelbrot"))
-		FRCT = &mandelbrot;
-	else if (!ft_strcmp(name, "julia"))
-		FRCT = &julia;
-	else if (!ft_strcmp(name, "buddhabrot"))
-		FRCT = &buddhabrot;
-	else if (!ft_strcmp(name, "newton"))
-		FRCT = &newton;
-	else
-		error_usage();
-}*/
 
 static int	create_img(t_param *param)
 {
 	int		posx;
 	int		posy;
 
+	if (M)
+		ITER += (ITER < ITER_MAX) ? 1 : 0;
 	posx = (WIN_X / 2 - (X2 - X1) * ZOOM / 2) + POSX - 5;
 	posy = (WIN_Y / 2 - (Y2 - Y1) * ZOOM / 2) + POSY - 25;
 	FRCT(posx, posy, param);
@@ -47,7 +35,7 @@ void		img_put_pixel(t_param *param, int x, int y, unsigned int color)
 
 	b = ((color & 0xFF0000) >> 16);
 	g = ((color & 0xFF00) >> 8);
-	r = ((color & 0xFF));
+	r = (color & 0xFF);
 	IMG_ADDR[y * SIZELINE + x * (BPP / 8)] = r;
 	IMG_ADDR[y * SIZELINE + x * (BPP / 8) + 1] = g;
 	IMG_ADDR[y * SIZELINE + x * (BPP / 8) + 2] = b;
@@ -65,13 +53,15 @@ int			main(int ac, char **av)
 	if (ac == 2)
 	{
 		param = init_param(900, 800, opt, av[i]);
-		mlx_expose_hook(WIN, create_img, param);
+		if (M)
+			ITER = 0;
 		mlx_loop_hook(MLX, create_img, param);
+		mlx_expose_hook(WIN, create_img, param);
 		mlx_hook(WIN, KeyPress, KeyPressMask, ft_key, param);
 		mlx_hook(WIN, ButtonPress, Button1MotionMask, ft_mouse, param);
 		mlx_hook(WIN, ButtonPress, ButtonPressMask, ft_mouse, param);
 		mlx_loop(MLX);
-		free(param);
+		free_param(param);
 	}
 	else
 		error_usage();

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.c                                           :+:      :+:    :+:   */
+/*   key_event.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 19:47:10 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/05/31 17:41:44 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/06/05 22:56:33 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static void	move_img(int keycode, t_param *param)
 {
 	if (keycode == 0 || keycode == 123)
-		POSX -= 20;
+		POSX -= 10;
 	if (keycode == 2 || keycode == 124)
-		POSX += 20;
+		POSX += 10;
 	if (keycode == 13 || keycode == 126)
-		POSY -= 20;
+		POSY -= 10;
 	if (keycode == 1 || keycode == 125)
-		POSY += 20;
+		POSY += 10;
 }
 
 static void	change_color(int keycode, t_param *param)
@@ -42,14 +42,14 @@ static void	change_color(int keycode, t_param *param)
 
 static void	zoom(int keycode, t_param *param)
 {
-	if (keycode == 78)
+	if (keycode == 78 && ZOOM > 0)
 	{
-		ZOOM /= (ZOOM > 0) ? 1.5 : 1;
+		ZOOM /= 1.5;
 		POSX /= 1.5;
 		POSY /= 1.5;
 		ITER -= 3;
 	}
-	if (keycode == 69)
+	if (keycode == 69 && ZOOM < 900000000)
 	{
 		ZOOM *= 1.5;
 		ITER += 3;
@@ -58,51 +58,24 @@ static void	zoom(int keycode, t_param *param)
 	}
 }
 
-int			ft_mouse(int button, int x, int y, t_param *param)
-{
-	if (button == 1 && x > WIN_X - 70 && x < WIN_X - 50 && y > 7 && y < 47)
-		COLOR = 0;
-	if (button == 1 && x > WIN_X - 50 && x < WIN_X - 30 && y > 7 && y < 47)
-		COLOR = 1;
-	if (button == 1 && x > WIN_X - 30 && x < WIN_X && y > 7 && y < 47)
-		COLOR = 2;
-	if (button == 5)
-	{
-		ZOOM *= 1.5;
-		ITER += 3;
-		POSX = (WIN_X - 20) / 2 - x + 10 + POSX * 1.5;
-		POSY = (WIN_Y - 60) / 2 - y + 50 + POSY * 1.5;
-	}
-	if (button == 4)
-	{
-		ZOOM /= (ZOOM > 0) ? 1.5 : 1;
-		ITER -= 3;
-		POSX = (WIN_X - 20) / 2 - x + 10 + POSX / 1.5;
-		POSY = (WIN_Y - 60) / 2 - y + 50 + POSY / 1.5;
-	}
-	//printf("btn: %d\nx: %d\ny: %d\n", button, x, y);
-	return (0);
-}
-
 int			ft_key(int keycode, t_param *param)
 {
+	move_img(keycode, param);
+	change_color(keycode, param);
+	zoom(keycode, param);
 	if (keycode == 53)
+	{
+		free_param(param);
 		exit(EXIT_SUCCESS);
+	}
 	if (keycode == 49)
 		init_pos(NAME, param);
-	if (keycode == 0 || keycode == 2 || keycode == 13 || keycode == 1 ||
-			(keycode >= 123 && keycode <= 126))
-		move_img(keycode, param);
-	if ((keycode >= 18 && keycode <= 23) || keycode == 26)
-		change_color(keycode, param);
-	if (keycode == 78 || keycode == 69)
-		zoom(keycode, param);
 	if (keycode == 17)
-		ITER += (ITER < 500) ? 2 : 0;
+		ITER += (ITER < 500) ? 1 : 0;
 	if (keycode == 5)
-		ITER -= (ITER > 2) ? 2 : 0;
+		ITER -= (ITER > 2) ? 1 : 0;
 	if (keycode == 35)
-		OPT = ~P;
+		OPT ^= (P) ? P : ~P;
 	if (keycode == 24)
 		V += (V < 5) ? 0.001 : 0;
 	if (keycode == 27)

@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 14:22:35 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/05/13 16:35:16 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/06/03 14:21:37 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error_usage(void)
 {
-	ft_putstr("usage: ./fractol [-p] mandelbrot | julia\n");
+	ft_putstr("usage: ./fractol [-mp] julia | mandelbrot | sierpinski\n");
 	exit(EXIT_FAILURE);
 }
 

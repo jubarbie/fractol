@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/26 10:48:32 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/05/31 17:18:12 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/06/05 22:38:10 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@
 # include "mlx.h"
 # include "libft.h"
 
-# define OPT_REF "p"
+# define OPT_REF "mp"
 # define OPT param->opt
-# define P (OPT & (1 << 0))
+# define M (OPT & (1 << 0))
+# define P (OPT & (1 << 1))
 # define MLX param->mlx
 # define WIN param->win
 # define POSX param->pos_x
@@ -43,6 +44,7 @@
 # define Y1 param->y1
 # define Y2 param->y2
 # define ITER param->iter
+# define ITER_MAX param->iter_max
 # define C_R param->c_r
 # define C_I param->c_i
 # define Z_R param->z_r
@@ -61,35 +63,36 @@
 
 typedef struct	s_param
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	int		win_x;
-	int		win_y;
-	int		pos_x;
-	int		pos_y;
-	int		width;
-	int		height;
-	int		bpp;
-	int		sizeline;
-	int		endian;
-	char	*img_addr;
-	double	zoom;
-	double	x1;
-	double	x2;
-	double	y1;
-	double	y2;
-	int		iter;
-	int		color;
-	int		*palette;
-	double	c_r;
-	double	c_i;
-	double	z_r;
-	double	z_i;
-	void	(*frct)(int, int, struct s_param *);
-	char	*name;
-	char	opt;
-	double	v;
+	void		*mlx;
+	void		*win;
+	void		*img;
+	int			win_x;
+	int			win_y;
+	int			pos_x;
+	int			pos_y;
+	int			width;
+	int			height;
+	int			bpp;
+	int			sizeline;
+	int			endian;
+	char		*img_addr;
+	long double	zoom;
+	long double	x1;
+	long double	x2;
+	long double	y1;
+	long double	y2;
+	int			iter;
+	int			iter_max;
+	int			color;
+	int			*palette;
+	long double	c_r;
+	long double	c_i;
+	long double	z_r;
+	long double	z_i;
+	void		(*frct)(int, int, struct s_param *);
+	char		*name;
+	char		opt;
+	long double	v;
 }				t_param;
 
 typedef	struct	s_pix
@@ -100,6 +103,7 @@ typedef	struct	s_pix
 }				t_pix;
 
 t_param			*init_param(int size_x, int size_y, char opt, char *name);
+void			free_param(t_param *param);
 void			init_pos(char *name, t_param *param);
 
 void			img_put_pixel(t_param *param, int x, int y, unsigned int color);
@@ -107,6 +111,8 @@ void			img_put_pixel(t_param *param, int x, int y, unsigned int color);
 void			mandelbrot(int posx, int posy, t_param *param);
 void			julia(int posx, int posy, t_param *param);
 void			buddhabrot(int poxs, int posy, t_param *param);
+void			brain(int poxs, int posy, t_param *param);
+void			burningship(int poxs, int posy, t_param *param);
 void			newton(int poxs, int posy, t_param *param);
 void			sierpinski(int posx, int posy, t_param *param);
 
