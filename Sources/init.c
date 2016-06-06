@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 17:19:58 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/06/05 22:53:39 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/06/06 17:05:52 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,14 @@ static void	init_palette(t_param *param)
 {
 	if (!(PAL = malloc(sizeof(unsigned int) * 6)))
 		exit(EXIT_FAILURE);
-	PAL[0] = BLU;
-	PAL[1] = GRE;
-	PAL[2] = RED;
-	PAL[3] = PUR;
-	PAL[4] = BLG;
-	PAL[5] = RAI;
+	PAL[0] = BNW;
+	PAL[1] = BLU;
+	PAL[2] = GRE;
+	PAL[3] = RED;
+	PAL[4] = PUR;
+	PAL[5] = BLG;
+	PAL[6] = RAI;
+	PAL[7] = PSY;
 	COLOR = 0;
 }
 

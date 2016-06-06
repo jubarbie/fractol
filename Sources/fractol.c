@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/05 20:11:28 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/06/05 22:53:42 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/06/06 19:03:39 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,32 @@ int			main(int ac, char **av)
 	char	opt;
 	int		i;
 	t_param	*param;
+	pid_t	pid;
 
 	i = get_options(ac, av, &opt);
-	ac -= i;
-	i += ac - 1;
-	if (ac == 2)
+	ac -= i + 1;
+	dprintf(1, "i: %d\nac: %d\n", i, ac);
+	if (ac)
 	{
-		param = init_param(900, 800, opt, av[i]);
-		if (M)
-			ITER = 0;
-		mlx_loop_hook(MLX, create_img, param);
-		mlx_expose_hook(WIN, create_img, param);
-		mlx_hook(WIN, KeyPress, KeyPressMask, ft_key, param);
-		mlx_hook(WIN, ButtonPress, Button1MotionMask, ft_mouse, param);
-		mlx_hook(WIN, ButtonPress, ButtonPressMask, ft_mouse, param);
-		mlx_loop(MLX);
-		free_param(param);
+		pid = fork();
+		while (ac-- > 0)
+		{
+			i++;
+			dprintf(1, "%s\n", av[i + ac]);
+			if (pid == fork())
+			{
+			param = init_param(1000, 900, opt, av[i + ac]);
+			if (M)
+				ITER = 0;
+			mlx_loop_hook(MLX, create_img, param);
+			mlx_expose_hook(WIN, create_img, param);
+			mlx_hook(WIN, KeyPress, KeyPressMask, ft_key, param);
+			mlx_hook(WIN, MotionNotify, ButtonMotionMask, ft_mouse_motion, param);
+			mlx_hook(WIN, ButtonPress, ButtonPressMask, ft_mouse, param);
+			mlx_loop(MLX);
+			free_param(param);
+			}
+		}
 	}
 	else
 		error_usage();

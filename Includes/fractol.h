@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/26 10:48:32 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/06/05 22:38:10 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/06/06 17:05:55 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@
 # include "mlx.h"
 # include "libft.h"
 
-# define OPT_REF "mp"
+# define OPT_REF "mpz"
 # define OPT param->opt
 # define M (OPT & (1 << 0))
 # define P (OPT & (1 << 1))
+# define Z (OPT & (1 << 2))
 # define MLX param->mlx
 # define WIN param->win
 # define POSX param->pos_x
@@ -53,12 +54,14 @@
 # define NAME param->name
 # define V param->v
 # define COLOR param->color
+# define BNW 255 / ITER << 0 | 255 / ITER << 8 | 255 / ITER << 16
 # define BLU 255 / ITER << 0
 # define GRE 255 / ITER << 8
 # define RED 255 / ITER << 16
 # define BLG 255 << (ITER % 8)
 # define PUR 255 / ITER << 0 | 255 / ITER << 16
 # define RAI 255 / (ITER) << 0 ^ 255 / (ITER / 2) << 8 ^ 255 / (ITER / 3) << 16
+# define PSY 0x00FFFFFF / ITER
 # define PAL (param->palette)
 
 typedef struct	s_param
@@ -126,5 +129,6 @@ void			display_toolbar(char *title, t_param *param);
 
 int				ft_key(int keycode, t_param *param);
 int				ft_mouse(int button, int x, int y, t_param *param);
+int				ft_mouse_motion(int x, int y, t_param *param);
 
 #endif

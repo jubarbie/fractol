@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 12:38:18 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/06/05 22:31:20 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/06/06 17:23:35 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,12 @@ static void	draw_circle(int x, int y, char c, t_param *param)
 		while (++i <= x + r * 2)
 			if (sqrt(ft_power_two(abs(x + r - i)) +
 						ft_power_two(abs(y + r - j))) < r)
-				mlx_pixel_put(MLX, WIN, i, j, color * ITER);
+			{
+				if (i < r)
+					mlx_pixel_put(MLX, WIN, i, j, color * ITER);
+				else
+					mlx_pixel_put(MLX, WIN, i, j, color * ITER * 2);	
+			};
 	}
 	mlx_string_put(MLX, WIN, x + 15, y + r / 2, 0x00FFFFFF, &c);
 }
@@ -90,10 +95,12 @@ void		display_toolbar(char *title, t_param *param)
 {
 	white_screen(param);
 	mlx_string_put(MLX, WIN, 10, 15, 0x00000000, title);
-	draw_circle(WIN_X - 40, 7, '6', param);
-	draw_circle(WIN_X - 60, 7, '5', param);
-	draw_circle(WIN_X - 80, 7, '4', param);
-	draw_circle(WIN_X - 100, 7, '3', param);
-	draw_circle(WIN_X - 120, 7, '2', param);
-	draw_circle(WIN_X - 140, 7, '1', param);
+	draw_circle(WIN_X - 40, 7, '8', param);
+	draw_circle(WIN_X - 60, 7, '7', param);
+	draw_circle(WIN_X - 80, 7, '6', param);
+	draw_circle(WIN_X - 100, 7, '5', param);
+	draw_circle(WIN_X - 120, 7, '4', param);
+	draw_circle(WIN_X - 140, 7, '3', param);
+	draw_circle(WIN_X - 160, 7, '2', param);
+	draw_circle(WIN_X - 180, 7, '1', param);
 }
