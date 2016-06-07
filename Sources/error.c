@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 14:22:35 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/06/06 18:28:45 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/06/07 10:26:26 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	error_usage(void)
 {
-	ft_putstr("usage: ./fractol [-mpz] burningship | julia | mandelbrot | ");
-	ft_putstr("newton | sierpinski\n");
+	ft_putstr("usage: ./fractol [-mpz] brain | burningship | julia | ");
+	ft_putstr("mandelbrot | newton | sierpinski\n");
 	exit(EXIT_FAILURE);
 }
 

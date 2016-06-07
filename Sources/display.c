@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 12:38:18 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/06/06 17:23:35 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/06/07 10:30:41 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static void	draw_circle(int x, int y, char c, t_param *param)
 				if (i < r)
 					mlx_pixel_put(MLX, WIN, i, j, color * ITER);
 				else
-					mlx_pixel_put(MLX, WIN, i, j, color * ITER * 2);	
-			};
+					mlx_pixel_put(MLX, WIN, i, j, color * ITER * 2);
+			}
 	}
 	mlx_string_put(MLX, WIN, x + 15, y + r / 2, 0x00FFFFFF, &c);
 }

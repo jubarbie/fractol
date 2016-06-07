@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 19:47:10 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/06/06 16:56:56 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/06/07 10:29:50 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,27 @@ static void	zoom(int keycode, t_param *param)
 	}
 }
 
+static void	change_fractal(int keycode, t_param *param)
+{
+	if (keycode == 83)
+		init_pos("brain", param);
+	if (keycode == 84)
+		init_pos("burningship", param);
+	if (keycode == 85)
+		init_pos("julia", param);
+	if (keycode == 86)
+		init_pos("mandelbrot", param);
+	if (keycode == 87)
+		init_pos("newton", param);
+	if (keycode == 88)
+		init_pos("sierpinski", param);
+}
+
 int			ft_key(int keycode, t_param *param)
 {
 	move_img(keycode, param);
 	change_color(keycode, param);
+	change_fractal(keycode, param);
 	zoom(keycode, param);
 	if (keycode == 53)
 	{
@@ -86,9 +103,5 @@ int			ft_key(int keycode, t_param *param)
 		V += (V < 5) ? 0.001 : 0;
 	if (keycode == 27)
 		V -= (V > -5) ? 0.001 : 0;
-	if (keycode == 38)
-		init_pos("julia", param);
-	if (keycode == 46)
-		init_pos("mandelbrot", param);
 	return (0);
 }
