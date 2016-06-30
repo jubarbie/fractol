@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/05 22:01:18 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/06/06 17:10:23 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/06/30 17:53:44 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	zoom(int button, int x, int y, t_param *param)
 {
-	if (button == 5 && ZOOM < 900000000)
+	if (button == 5 && ZOOM < 1400000000)
 	{
 		ZOOM *= 1.5;
 		ITER += 3;

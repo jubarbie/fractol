@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 12:38:18 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/06/07 10:30:41 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/06/30 19:20:34 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,35 +59,23 @@ static void	param_back(t_param *param)
 	int	y;
 
 	y = 54;
-	while (++y < 186)
+	while (++y < 106)
 	{
 		x = 14;
-		while (++x < 171)
+		while (++x < 191)
 			mlx_pixel_put(MLX, WIN, x, y, 0x0000000);
 	}
 }
 
 void		display_param(t_param *param)
 {
-	char	s[6];
-
 	if (P)
 	{
 		param_back(param);
-		mlx_string_put(MLX, WIN, 20, 60, 0x00FFFFFF, "x1: ");
-		mlx_string_put(MLX, WIN, 100, 60, 0x00FFFFFF, ft_itoa(X1));
-		mlx_string_put(MLX, WIN, 20, 80, 0x00FFFFFF, "x2: ");
-		mlx_string_put(MLX, WIN, 100, 80, 0x00FFFFFF, ft_itoa(X2));
-		mlx_string_put(MLX, WIN, 20, 100, 0x00FFFFFF, "iter: ");
-		mlx_string_put(MLX, WIN, 100, 100, 0x00FFFFFF, ft_itoa(ITER));
-		mlx_string_put(MLX, WIN, 20, 120, 0x00FFFFFF, "zoom: ");
-		mlx_string_put(MLX, WIN, 100, 120, 0x00FFFFFF, ft_itoa(ZOOM / 100));
-		mlx_string_put(MLX, WIN, 20, 140, 0x00FFFFFF, "cr: ");
-		snprintf(s, 6, "%Lf", C_R);
-		mlx_string_put(MLX, WIN, 100, 140, 0x00FFFFFF, s);
-		mlx_string_put(MLX, WIN, 20, 160, 0x00FFFFFF, "ci: ");
-		snprintf(s, 6, "%Lf", C_I);
-		mlx_string_put(MLX, WIN, 100, 160, 0x00FFFFFF, s);
+		mlx_string_put(MLX, WIN, 20, 60, 0x00FFFFFF, "iter: ");
+		mlx_string_put(MLX, WIN, 100, 60, 0x00FFFFFF, ft_itoa(ITER));
+		mlx_string_put(MLX, WIN, 20, 80, 0x00FFFFFF, "zoom: ");
+		mlx_string_put(MLX, WIN, 100, 80, 0x00FFFFFF, ft_itoa(ZOOM / 100));
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/26 10:48:32 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/06/07 10:43:14 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/06/30 19:40:40 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include </System/Library/Frameworks/Tk.framework/Versions/8.5/Headers/X11/X.h>
 # include <OpenCL/opencl.h>
+# include <pthread.h>
 # include "mlx.h"
 # include "libft.h"
 
@@ -30,6 +31,8 @@
 # define WIN param->win
 # define POSX param->pos_x
 # define POSY param->pos_y
+# define PX param->px
+# define PY param->py
 # define WIN_X param->win_x
 # define WIN_Y param->win_y
 # define WIDTH param->width
@@ -96,6 +99,8 @@ typedef struct	s_param
 	char		*name;
 	char		opt;
 	long double	v;
+	int			px;
+	int			py;
 }				t_param;
 
 typedef	struct	s_pix

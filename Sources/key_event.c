@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 19:47:10 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/06/07 10:29:50 by jubarbie         ###   ########.fr       */
+/*   Updated: 2016/06/07 11:31:34 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ static void	change_color(int keycode, t_param *param)
 
 static void	zoom(int keycode, t_param *param)
 {
-	if (keycode == 78 && ZOOM > 0)
+	if (keycode == 78 && ZOOM > 50)
 	{
 		ZOOM /= 1.5;
 		POSX /= 1.5;
 		POSY /= 1.5;
 		ITER -= 3;
 	}
-	if (keycode == 69 && ZOOM < 900000000)
+	if (keycode == 69 && ZOOM < 1400000000)
 	{
 		ZOOM *= 1.5;
 		ITER += 3;
