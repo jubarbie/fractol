@@ -22,7 +22,7 @@
 # include "mlx.h"
 # include "libft.h"
 
-# define NB_TH 50
+# define NB_TH 8
 # define OPT_REF "mpz"
 # define OPT param->opt
 # define M (OPT & (1 << 0))
@@ -67,6 +67,7 @@
 # define RAI 255 / (ITER) << 0 ^ 255 / (ITER / 2) << 8 ^ 255 / (ITER / 3) << 16
 # define PSY 0x00FFFFFF / ITER
 # define PAL (param->palette)
+# define TH param->th
 
 typedef struct	s_param
 {
@@ -96,12 +97,13 @@ typedef struct	s_param
 	long double	c_i;
 	long double	z_r;
 	long double	z_i;
-	void		(*frct)(int, int, struct s_param *);
+	void		(*frct)(int, struct s_param *);
 	char		*name;
 	char		opt;
 	long double	v;
 	int			px;
 	int			py;
+	int			th;
 }				t_param;
 
 typedef	struct	s_pix
@@ -111,19 +113,27 @@ typedef	struct	s_pix
 	unsigned int	color;
 }				t_pix;
 
+typedef struct s_fract_param
+{
+	long double	c_r;
+	long double	c_i;
+	long double	z_r;
+	long double	z_i;
+}				t_fract_param;
+
 t_param			*init_param(int size_x, int size_y, char opt, char *name);
 void			free_param(t_param *param);
 void			init_pos(char *name, t_param *param);
 
 void			img_put_pixel(t_param *param, int x, int y, unsigned int color);
 
-void			mandelbrot(int posx, int posy, t_param *param);
-void			julia(int posx, int posy, t_param *param);
-void			buddhabrot(int poxs, int posy, t_param *param);
-void			brain(int poxs, int posy, t_param *param);
-void			burningship(int poxs, int posy, t_param *param);
-void			newton(int poxs, int posy, t_param *param);
-void			sierpinski(int posx, int posy, t_param *param);
+//void			mandelbrot(int th, t_param *param);
+void			julia(int th, t_param *param);
+/*void			buddhabrot(int th, t_param *param);
+void			brain(int th, t_param *param);
+void			burningship(int th, t_param *param);
+void			newton(int th, t_param *param);
+void			sierpinski(int th, t_param *param);*/
 
 int				get_options(int ac, char **av, char *opt);
 

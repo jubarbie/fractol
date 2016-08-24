@@ -12,76 +12,62 @@
 
 #include "fractol.h"
 
-void	*prm;
+t_param	*param;
 
-/*static void	fract_calc(t_param *param)
+static void	update_param(t_fract_param *fprm)
 {
 	long double	tmp;
 
-	tmp = Z_R;
-	Z_R = Z_R * Z_R - Z_I * Z_I + C_R;
-	Z_I = 2 * Z_I * tmp + C_I;
-}*/
+	tmp = fprm->z_r;
+	fprm->z_r = fprm->z_r * fprm->z_r - fprm->z_i * fprm->z_i + fprm->c_r;
+	fprm->z_i = 2 * fprm->z_i * tmp + fprm->c_i;
+}
 
-static void		*julia1(void *th)
+static void	init_fract(t_fract_param *fprm, t_pix *pix, t_param *param)
 {
-	int	x;
-	int	y;
+	fprm->c_r = 0.285 + V;
+	fprm->c_i = 0.01 / V;
+	fprm->z_r = (pix->x - PX) / ZOOM + X1;
+	fprm->z_i = (pix->y - PY) / ZOOM + Y1;
+}
+
+static void		*calc_fract(void *arg)
+{
+	t_pix	pix;
+	t_fract_param fprm;
 	int	i;
-	long double c_r;
-	long double c_i;
-	long double z_r;
-	long double z_i;
-	long double tmp;
-	t_param	*param;
+	static int th;
+	t_param *param;
 
-	param = (t_param *)prm;
-	x = -1;
-	while (++x < WIDTH)
+	param = arg;
+	th = TH;
+	pix.x = -1;
+	while (++(pix.x) < WIDTH)
 	{
-		y = *(int *)th * (HEIGHT / NB_TH) - 1;
-		while (++y < (*(int *)th + 1)  * HEIGHT /NB_TH)
+		pix.y = th * (HEIGHT / NB_TH) - 1;
+		while (++(pix.y) < (th + 1) * HEIGHT /NB_TH)
 		{
-			c_r = 0.285 + V;
-			c_i = 0.01 / V;
-			z_r = (x - PX) / ZOOM + X1;
-			z_i = (y - PY) / ZOOM + Y1;
+			init_fract(&fprm, &pix, param);	
 			i = -1;
-			while (z_r * z_r + z_i * z_i < 4 && ++i < ITER)
-			{
-				tmp = z_r;
-				z_r = z_r * z_r - z_i * z_i + c_r;
-				z_i = 2 * z_i * tmp + c_i;
-
-			}
+			while (fprm.z_r * fprm.z_r + fprm.z_i * fprm.z_i < 4 && ++i < ITER)
+				update_param(&fprm);
 			if (i == ITER)
-				img_put_pixel(param, x, y, 0);
+				img_put_pixel(param, pix.x, pix.y, 0);
 			else
-				img_put_pixel(param, x, y, mlx_get_color_value(MLX, 0
-							| i * PAL[COLOR]));
+				img_put_pixel(param, pix.x, pix.y, mlx_get_color_value(MLX, 0
+							| (i * (PAL[COLOR]))));
 		}
 	}
 	pthread_exit (0);
 }
 
-void 		julia(int posx, int posy, t_param *param)
+void 		julia(int i, t_param *param)
 {
-	int i;
+	pthread_t	th;
+	void *arg = param;
 
-	i = -1;
-	PX = posx;
-	PY = posy;
-	prm = (void *)param;
-	while (++i < NB_TH)
-	{	
-		pthread_t	th;
-		int n_th;
-		n_th = i;
-		if (pthread_create(&th, NULL, &julia1, (void *)&n_th) < 0)
-		{
-    			fprintf (stderr, "pthread_create error for thread 1\n");
-    			exit (1);
-  		}
-		(void)pthread_join (th, NULL);
-	}
+	TH = i;
+	if (pthread_create(&th, NULL, &calc_fract, arg) < 0)
+		exit (1);
+	(void)pthread_join (th, NULL);
 }

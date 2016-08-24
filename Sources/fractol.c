@@ -14,14 +14,15 @@
 
 static int	create_img(t_param *param)
 {
-	int		posx;
-	int		posy;
+	int i;
 
 	if (M)
 		ITER += (ITER < ITER_MAX) ? 1 : 0;
-	posx = (WIN_X / 2 - (X2 - X1) * ZOOM / 2) + POSX - 5;
-	posy = (WIN_Y / 2 - (Y2 - Y1) * ZOOM / 2) + POSY - 25;
-	FRCT(posx, posy, param);
+	PX = (WIN_X / 2 - (X2 - X1) * ZOOM / 2) + POSX - 5;
+	PY = (WIN_Y / 2 - (Y2 - Y1) * ZOOM / 2) + POSY - 25;
+	i = -1;
+	while (++i < NB_TH)
+		FRCT(i, param);
 	mlx_put_image_to_window(MLX, WIN, IMG, 11, 51);
 	display_param(param);
 	return (0);

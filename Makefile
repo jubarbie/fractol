@@ -19,7 +19,7 @@ SRC=	Sources/fractol.c		\
 		Sources/options.c		\
 		Sources/key_event.c		\
 		Sources/mouse_event.c	\
-		Sources/julia.c			\
+		Sources/julia.c		#	\
 		Sources/mandelbrot.c	\
 		Sources/brain.c			\
 		Sources/burningship.c	\
@@ -43,7 +43,7 @@ $(NAME): $(OBJ)
 	@echo "\033[0m"
 	@make -C Libs/libft
 	@make -C Libs/libmlx
-	@$(CC) -LLibs/libft/ -lft -LLibs/libmlx/ -lmlx -framework OpenGL -framework AppKit -framework Opencl -o $@ $^
+	@$(CC) -LLibs/libft/ -lft -LLibs/libmlx/ -lmlx -framework OpenGL -framework AppKit -framework Opencl -lpthread -o $@ $^
 	@echo "\033[32m[OK]\033[0m fractol created"
 
 all: $(NAME)

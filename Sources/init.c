@@ -18,10 +18,10 @@
 
 static void	get_fractale(char *name, t_param *param)
 {
-	if (!ft_strcmp(name, "mandelbrot"))
-		FRCT = &mandelbrot;
-	else if (!ft_strcmp(name, "julia"))
+	if (!ft_strcmp(name, "julia"))
 		FRCT = &julia;
+	/*else if (!ft_strcmp(name, "mandelbrot"))
+		FRCT = &mandelbrot;
 	else if (!ft_strcmp(name, "buddhabrot"))
 		FRCT = &buddhabrot;
 	else if (!ft_strcmp(name, "newton"))
@@ -31,7 +31,7 @@ static void	get_fractale(char *name, t_param *param)
 	else if (!ft_strcmp(name, "burningship"))
 		FRCT = &burningship;
 	else if (!ft_strcmp(name, "brain"))
-		FRCT = &brain;
+		FRCT = &brain;*/
 	else
 		error_usage();
 	NAME = name;
