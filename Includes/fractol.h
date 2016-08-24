@@ -22,6 +22,7 @@
 # include "mlx.h"
 # include "libft.h"
 
+# define NB_TH 50
 # define OPT_REF "mpz"
 # define OPT param->opt
 # define M (OPT & (1 << 0))

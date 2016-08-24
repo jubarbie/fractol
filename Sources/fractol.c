@@ -54,7 +54,7 @@ int			main(int ac, char **av)
 	while (ac-- > 0)
 		if (fork() != 0)
 		{
-			param = init_param(1000, 900, opt, av[i + ac + 1]);
+			param = init_param(800, 600, opt, av[i + ac + 1]);
 			if (M)
 				ITER = 0;
 			mlx_loop_hook(MLX, create_img, param);
